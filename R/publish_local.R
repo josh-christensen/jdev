@@ -21,5 +21,9 @@ publish_local <- function(
     repository_path,
     package_path = "."
     ) {
-  file.path(repository_path, "src", "contrib")
+  # Determine where the tarball should be located
+  tarball_location <- base::file.path(repository_path, "src", "contrib")
+  # Determine where the binary package belongs
+  os <- base::Sys.info()['sysname']
+
 }
