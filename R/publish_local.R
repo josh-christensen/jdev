@@ -29,5 +29,8 @@ publish_local <- function(
   # Determine where the windows binary should be located
   windows_bin_location <- file.path(repository_path, "bin", "windows", "contrib", r_version)
   # Build the tarball
-  pkgbuild::build(pkg = package_path)
+  pkgbuild::build(path = package_path, dest_path = tarball_location)
+  # Build the binary
+  pkgbuild::build(path = package_path, dest_path = windows_bin_location, binary = TRUE)
+  # Add or update package directory files
 }
