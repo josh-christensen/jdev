@@ -15,8 +15,12 @@ publish_local(repository_path, package_path = ".")
 Generate or update a directory structure that can be read by \code{utils::install.packages}.
 }
 \details{
-This function creates a system of subdirectories
+Create or update a system of subdirectories that is recognized by \code{utils::install.packages} as a
+package repository. The function publishes the referenced package both as a source tarball and as
+a binary package under the current operating system. As a result, installation of the package
+will fail if attempted from a different operating system with no available toolchain unless
+a separate binary is created and added.
 }
 \examples{
-\dontrun{publish_local()}
+\dontrun{publish_local("C:/Path/To/Repo")}
 }
