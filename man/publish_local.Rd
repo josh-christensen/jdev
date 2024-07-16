@@ -7,19 +7,24 @@
 publish_local(repository_path, package_path = ".")
 }
 \arguments{
-\item{repository_path}{Folder in which to create the repository or update an existing one.}
+\item{repository_path}{Folder in which to create the repository or update an
+existing one.}
 
-\item{package_path}{Path to the parent directory of the package to be published.}
+\item{package_path}{Path to the parent directory of the package to be
+published.}
 }
 \description{
-Generate or update a directory structure that can be read by \code{utils::install.packages}.
+Generate or update a directory structure that can be read by
+\code{utils::install.packages}.
 }
 \details{
-Create or update a system of subdirectories that is recognized by \code{utils::install.packages} as a
-package repository. The function publishes the referenced package both as a source tarball and as
-a binary package under the current operating system. As a result, installation of the package
-will fail if attempted from a different operating system with no available toolchain unless
-a separate binary is created and added.
+The function currently only behaves as intended on the Windows operating
+system. Create or update a directory structure that is recognized by
+\code{utils::install.packages} as a package repository. The function publishes the
+referenced package both as a source tarball and as a binary package for the
+Windows operating system. As a result, installation of the package will fail
+if attempted from a different operating system with no available toolchain
+unless a separate binary is created and added.
 }
 \examples{
 \dontrun{publish_local("C:/Path/To/Repo")}

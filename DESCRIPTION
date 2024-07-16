@@ -1,15 +1,13 @@
 Package: jdev
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: Simplify Local Package Development
+Version: 0.2.0
+Authors@R: c(
+  person("Joshua", "Christensen", email = "joshuarc13@gmail.com", role = c("aut", "cre")))
+Description: Publish package locally with automatic archiving and structuring for easy installation.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 Imports: 
     pkgbuild

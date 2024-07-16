@@ -52,4 +52,42 @@ publish_local <- function(
   # Add or update package directory metadata files
   tools::write_PACKAGES(dir = tarball_location, type = "source")
   tools::write_PACKAGES(dir = windows_bin_location, type = "win.binary")
+
+  # Archive old tarballs and delete old binaries
+  current_packages <- utils::available.packages(paste0("file:", tarball_location))[, c("Package", "Version")]
+
+  # tarballs
+  all_src_files <- list.files(tarball_location, pattern = ".tar.gz")
+  for (i in 1:nrow(current_packages)) {
+    current_pkg <- current_packages[i,]
+    pkg_name <- current_pkg["Package"]
+    pkg_version <- current_pkg["Version"]
+    pkg_src_files <- grep(pkg_name, all_src_files, value = TRUE)
+    old_src_files <- grep(pkg_version, pkg_src_files, value = TRUE, invert = TRUE)
+
+    pkg_archive <- file.path(tarball_location, "Archive", pkg_name)
+    if(!dir.exists(pkg_archive)) {
+      dir.create(pkg_archive, recursive = TRUE)
+    }
+
+    if(length(old_src_files) > 0) {
+      move_success <- file.rename(from = file.path(tarball_location, old_src_files), to = file.path(pkg_archive, old_src_files))
+      if(!isTRUE(all(move_success))) warning("Archive failed")
+    }
+  }
+
+  # binaries
+  all_bin_files <- list.files(windows_bin_location, pattern = ".zip")
+  for (i in 1:nrow(current_packages)) {
+    current_pkg <- current_packages[i,]
+    pkg_name <- current_pkg["Package"]
+    pkg_version <- current_pkg["Version"]
+    pkg_bin_files <- grep(pkg_name, all_bin_files, value = TRUE)
+    old_bin_files <- grep(pkg_version, pkg_bin_files, value = TRUE, invert = TRUE)
+
+    if(length(old_bin_files) > 0) {
+      delete_success <- file.remove(file.path(windows_bin_location, old_bin_files))
+      if(!isTRUE(all(delete_success))) warning("Binary deletion failed")
+    }
+  }
 }
