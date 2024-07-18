@@ -54,7 +54,7 @@ publish_local <- function(
   tools::write_PACKAGES(dir = windows_bin_location, type = "win.binary")
 
   # Archive old tarballs and delete old binaries
-  current_packages <- utils::available.packages(paste0("file:", tarball_location))[, c("Package", "Version")]
+  current_packages <- matrix(utils::available.packages(paste0("file:", tarball_location))[, c("Package", "Version")], ncol = 2)
 
   # tarballs
   all_src_files <- list.files(tarball_location, pattern = ".tar.gz")
